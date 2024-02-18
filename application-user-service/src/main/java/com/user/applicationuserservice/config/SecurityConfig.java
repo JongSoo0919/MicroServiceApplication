@@ -21,6 +21,7 @@ public class SecurityConfig {
                 .headers((header) -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((request) -> request
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/**/**/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/users/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                         .anyRequest().authenticated());
