@@ -8,10 +8,14 @@ import lombok.Setter;
 @Setter
 //TODO : status return
 public class UserResponseDto {
-    private String message;
+    private String email;
+    private String name;
+    private String userId;
 
     @Builder
-    public UserResponseDto(String message) {
-        this.message = message;
+    public UserResponseDto(String email, String name, String userId) {
+        this.email = email;
+        this.name = name;
+        this.userId = userId;
     }
 }

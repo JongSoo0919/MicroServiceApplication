@@ -16,17 +16,17 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     @Override
     public UserResponseDto createUser(UserRequestDto userRequestDto) {
-        UserEntity entity = UserEntity.builder()
+        UserEntity user = userRepository.save(UserEntity.builder()
                 .email(userRequestDto.getEmail())
                 .name(userRequestDto.getName())
                 .userId(UUID.randomUUID().toString())
                 .encryptPwd("Encrypted_password") // TODO : 구현 예정
-                .build();
-
-        userRepository.save(entity);
+                .build());
 
         return UserResponseDto.builder()
-                .message("회원가입을 축하합니다.")
+                .email(user.getEmail())
+                .name(user.getName())
+                .userId(user.getUserId())
                 .build();
     }
 }

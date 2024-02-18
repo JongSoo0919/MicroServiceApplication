@@ -1,5 +1,6 @@
 package com.user.applicationuserservice.dto.request;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -12,7 +13,6 @@ import java.time.LocalDate;
 @Setter
 public class UserRequestDto {
     @NotNull
-    @Size(min = 2, message = "Email not be less than two character")
     @Email
     private String email;
 
