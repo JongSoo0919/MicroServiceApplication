@@ -6,6 +6,7 @@ import com.user.applicationuserservice.dto.response.UserResponseDto;
 import com.user.applicationuserservice.repository.UserRepository;
 import com.user.applicationuserservice.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -14,13 +15,14 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     @Override
     public UserResponseDto createUser(UserRequestDto userRequestDto) {
         UserEntity user = userRepository.save(UserEntity.builder()
                 .email(userRequestDto.getEmail())
                 .name(userRequestDto.getName())
                 .userId(UUID.randomUUID().toString())
-                .encryptPwd("Encrypted_password") // TODO : 구현 예정
+                .encryptPwd(bCryptPasswordEncoder.encode(userRequestDto.getPwd()))
                 .build());
 
         return UserResponseDto.builder()
