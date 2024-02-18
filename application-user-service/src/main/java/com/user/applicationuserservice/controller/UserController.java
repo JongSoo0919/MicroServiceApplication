@@ -4,6 +4,7 @@ import com.user.applicationuserservice.constants.Constants;
 import com.user.applicationuserservice.dto.request.UserRequestDto;
 import com.user.applicationuserservice.dto.response.UserResponseDto;
 import com.user.applicationuserservice.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +25,10 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto userRequestDto) {
+    public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody UserRequestDto userRequestDto) {
         //TODO : ExceptionHandler
         //TODO : Swagger
-        return ResponseEntity.ok(userService.createUser(userRequestDto));
+        return ResponseEntity.status(201).body(userService.createUser(userRequestDto));
     }
 
 }
