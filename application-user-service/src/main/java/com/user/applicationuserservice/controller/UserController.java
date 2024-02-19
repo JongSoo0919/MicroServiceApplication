@@ -10,6 +10,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user-service")
 @RequiredArgsConstructor
@@ -23,6 +25,18 @@ public class UserController {
     @GetMapping("/welcome")
     public String welcome() {
         return Constants.WELCOME_MESSAGE;
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<UserResponseDto>> getUsers() {
+        return ResponseEntity.ok().body(userService.getUsers());
+    }
+
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<UserResponseDto> getUserById(
+            @PathVariable String userId
+    ) {
+        return ResponseEntity.ok().body(userService.getUserByUserId(userId));
     }
 
     @PostMapping("/users")
