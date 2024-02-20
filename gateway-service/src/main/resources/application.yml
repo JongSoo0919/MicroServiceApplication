@@ -18,6 +18,10 @@ spring:
             uri: lb://APPLICATION-USER-SERVICE
             predicates:
               - Path=/user-service/**
+          - id: application-catalogue-service
+            uri: lb://APPLICATION-CATALOGUE-SERVICE
+            predicates:
+              - Path=/catalogue-service/**
           - id : first-service
             uri : lb://GATEWAY-FIRST-SERVICE
             predicates:
