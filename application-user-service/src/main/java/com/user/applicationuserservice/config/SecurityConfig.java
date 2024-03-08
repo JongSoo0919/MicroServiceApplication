@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((request) -> request
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")))
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).permitAll())
                 .addFilterAt(loginFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
