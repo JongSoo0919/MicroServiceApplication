@@ -53,8 +53,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         CustomUserDetails customUserDetails = (CustomUserDetails) authResult.getPrincipal();
         UserEntity user = userService.getUserByEmail(customUserDetails.getUsername());
 
-        response.addHeader("token", jwtUtils.createToken(user.getId(), user.getEmail(), user.getUserId(), user.getName(), "ROLE_USER"));
-        response.addHeader("userId", user.getUserId());
+        response.addHeader("Authorization", "Bearer " + jwtUtils.createToken(user.getId(), user.getEmail(), user.getUserId(), user.getName(), "ROLE_USER"));
+//        response.addHeader("userId", user.getUserId());
     }
 
     @Override
