@@ -1,14 +1,17 @@
 package com.user.applicationuserservice.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.user.applicationuserservice.domain.UserEntity;
+import com.user.applicationuserservice.dto.CustomUserDetails;
 import com.user.applicationuserservice.dto.request.UserLoginRequestDto;
+import com.user.applicationuserservice.service.UserService;
+import com.user.applicationuserservice.util.JwtUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,7 +23,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @RequiredArgsConstructor
+@Slf4j
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
+    private final UserService userService;
+    private final JwtUtils jwtUtils;
     private final AuthenticationManager authenticationManager;
     private final ObjectMapper objectMapper = new ObjectMapper();
     @Override
@@ -44,7 +50,11 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
-        System.out.println("로그인 성공 후 처리");
+        CustomUserDetails customUserDetails = (CustomUserDetails) authResult.getPrincipal();
+        UserEntity user = userService.getUserByEmail(customUserDetails.getUsername());
+
+        response.addHeader("token", jwtUtils.createToken(user.getId(), user.getEmail(), user.getUserId(), user.getName(), "ROLE_USER"));
+        response.addHeader("userId", user.getUserId());
     }
 
     @Override

@@ -20,11 +20,16 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService, UserDetailsService{
+public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     @Override
     public UserResponseDto createUser(UserRequestDto userRequestDto) {
+        // 중복 회원가입 처리
+        if (userRepository.existsByEmail(userRequestDto.getEmail())) {
+            throw new RuntimeException("이미 존재하는 회원입니다.");
+        }
+
         UserEntity user = userRepository.save(UserEntity.builder()
                 .email(userRequestDto.getEmail())
                 .name(userRequestDto.getName())
@@ -65,6 +70,12 @@ public class UserServiceImpl implements UserService, UserDetailsService{
                 .userId(user.getUserId())
                 .orders(List.of())
                 .build();
+    }
+
+    @Override
+    public UserEntity getUserByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("회원이 존재하지 않습니다."));
     }
 
     @Override
