@@ -42,6 +42,7 @@ spring:
           - id: application-user-service
             uri: lb://APPLICATION-USER-SERVICE
             predicates:
+              #401 Error 잡아야함
               - Path=/user-service/actuator/**
               - Method=GET,POST
             filters:
