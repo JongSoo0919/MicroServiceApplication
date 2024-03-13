@@ -39,6 +39,14 @@ spring:
               - RemoveRequestHeader=Cookie
               - RewritePath=/user-service/(?<segment>.*), /$\{segment}
               - AuthorizationHeaderFilter
+          - id: application-user-service
+            uri: lb://APPLICATION-USER-SERVICE
+            predicates:
+              - Path=/user-service/actuator/**
+              - Method=GET,POST
+            filters:
+              - RemoveRequestHeader=Cookie
+              - RewritePath=/user-service/(?<segment>.*), /$\{segment}
           - id: application-catalogue-service
             uri: lb://APPLICATION-CATALOGUE-SERVICE
             predicates:
@@ -77,3 +85,9 @@ spring:
 
 token:
   secret: 83f01c82ca0e459e653e9741067bccb04cb94bd3049e68b00cb6513c2d3cf957
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace
