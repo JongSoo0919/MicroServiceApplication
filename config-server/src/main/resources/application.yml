@@ -4,8 +4,27 @@ server:
 spring:
   application:
     name: config-server
+  profiles:
+    active: native
   cloud:
     config:
       server:
-        git:
-          uri: file://C:\PROJECT\MicroServiceApplication\config-server-file\local-repo
+        native:
+          search-locations: C:\PROJECT\MicroServiceApplication\config-server-file\native-file-repo
+#        git:
+#          uri: https://github.com/JongSoo0919/MicroServiceApplication
+#          default-label: main
+#          search-paths: config-server-file/**
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh, refresh

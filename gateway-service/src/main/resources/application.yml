@@ -9,8 +9,15 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 
 spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
   application:
     name: gateway-service
+
   cloud:
     gateway:
       routes:
@@ -84,11 +91,12 @@ spring:
             preLogger : true
             postLogger : true
 
-token:
-  secret: 83f01c82ca0e459e653e9741067bccb04cb94bd3049e68b00cb6513c2d3cf957
+#token:
+#  secret: 83f01c82ca0e459e653e9741067bccb04cb94bd3049e68b00cb6513c2d3cf957
 
 management:
   endpoints:
     web:
       exposure:
-        include: refresh, health, beans, httptrace
+        include: refresh, health, beans, httptrace, busrefresh
+
