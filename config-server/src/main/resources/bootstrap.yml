@@ -1,2 +1,5 @@
 encrypt:
-  key: abcdefghijklmnopqrstuvewxyz1234567890
+  key-store:
+    location: file:/c:/PROJECT/MicroEncryptionConfig/key_store/apiEncryptionKey.jks
+    password: test1234
+    alias: apiEncryptionKey

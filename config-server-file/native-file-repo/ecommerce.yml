@@ -1,7 +1,7 @@
 #변경2
 token:
   expiration_time: 86400001
-  secret: user_token_native_ecommerce
+  secret: '{cipher}AQAu4s02C2TUPOaAYX7L9PPNQ7rHyu8h7eCLAFC0ST1MtuNHh6mANuyKqZSbadeDtNscWf+H+FzGBDS5HO6kka3RhjENSpnEs06a+2nBdMxngO007Z3Lr4IXkEhKXYf7jos5yZoKqKKJ0sgMs7YqSFlc7VoUNeRbIfYNk7W/3NOsK1JisR6kc40Rvufri0rNR3djLgZUXTmL5wSKtQY1OEW/CIj+SIWP9FPKnymUbbuKDJbvP2R8KVVhBYxLXRRNQN6BslbIrN0LBlb1hdGUXoa4qEh9qssh+TZci58cfHOKWqGIZFYpjJTZVQB1ls+P45Q5aMilE3YlT94DJF7RjwkBBM8/3NbwmT03I9Pu2J5Himb35jicK0MyhjLmsrixxUWbTlOhTUsjRhegKz19mGw1'
 
 gateway:
   ip: 192.168.123.100
