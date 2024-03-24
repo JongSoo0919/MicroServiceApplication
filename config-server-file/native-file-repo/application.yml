@@ -1,7 +1,7 @@
 #변경2
 token:
   expiration_time: 86400000
-  secret: user_token_native_application
+  secret: '{cipher}AQBk9vhkciyrA3+SZEHyKZ43nvs+8DxwcodwOl8sEIy+tmrbh6mQctClnaNkyqLprGyS6ogRhXHCE9hvyaz7wAb12QYdKla3jYL04WefERX3R+R6PtCdp+AjylEJK2aw+YW9EZYuIF7XWzXFHrfOpiz66CTRhofjPRmdprQUWJgfUt0hyuYilIbkv18nb6kaxUaSC8mSYqvwv6DZeZBZRcsntPN1rYpIovIy2/fEBQ0sMax75os/eFB/CCmS3W00MSTnJoYxmOiaRzMjLoHPSqj3CuZBhKdqEO18PN1MxO+bAIn5c07ADVpz/pE+EWqh3VsHNYpcUdcT3wi9BEI9f4Qis3m/LUiPZguI3jNGIUuzsgjiEW7sWkndq1XrewtoIIURRHQ8tSjyRuVP1KlCoWtBzqK8nurmgG0Sq5r1WIF2zi8kSTbxi8jMLTgLWgMWM6cifB2Bg3/e453OeZ8w4STu'
 
 gateway:
   ip: 192.168.123.100

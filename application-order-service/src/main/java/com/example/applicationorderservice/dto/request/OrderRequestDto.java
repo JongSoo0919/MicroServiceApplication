@@ -2,10 +2,12 @@ package com.example.applicationorderservice.dto.request;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class OrderRequestDto {
     private String productId;
     private Integer qty;
@@ -14,7 +16,7 @@ public class OrderRequestDto {
 
     private String userId;
 
-    @Builder
+
     public OrderRequestDto(String productId, Integer qty, Integer unitPrice, Integer totalPrice, String userId) {
         this.productId = productId;
         this.qty = qty;

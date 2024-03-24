@@ -24,14 +24,14 @@ public class OrderController {
     @PostMapping("/{userId}/orders")
     public ResponseEntity<OrderResponseDto> createOrder(
             @RequestBody OrderRequestDto orderRequestDto
-            ,@PathVariable String userId) {
+            ,@PathVariable("userId") String userId) {
         orderRequestDto.setUserId(userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.createOrder(orderRequestDto));
     }
 
     @GetMapping("/{userId}/orders")
     public ResponseEntity<List<OrderResponseDto>> getOrdersByUserId(
-            @PathVariable String userId
+            @PathVariable("userId") String userId
     ) {
         return ResponseEntity.ok().body(orderService.getOrdersByUserId(userId));
     }
