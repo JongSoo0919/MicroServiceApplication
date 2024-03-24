@@ -1,5 +1,6 @@
 package com.user.applicationuserservice.service.impl;
 
+import com.user.applicationuserservice.client.OrderServiceClient;
 import com.user.applicationuserservice.domain.UserEntity;
 import com.user.applicationuserservice.dto.CustomUserDetails;
 import com.user.applicationuserservice.dto.request.UserRequestDto;
@@ -30,8 +31,9 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final RestTemplate restTemplate;
-    private final Environment env;
+    private final OrderServiceClient orderServiceClient;
+//    private final RestTemplate restTemplate;
+//    private final Environment env;
     @Override
     public UserResponseDto createUser(UserRequestDto userRequestDto) {
         // 중복 회원가입 처리
@@ -73,10 +75,12 @@ public class UserServiceImpl implements UserService{
         UserEntity user = userRepository.findByUserId(userId)
                 .orElseThrow(() -> new RuntimeException("유저가 존재 하지 않습니다."));
 
-        String orderUrl = String.format(env.getProperty("order_service.url"), userId);
-        ResponseEntity<List<OrderResponseDto>> listResponseEntity
-                = restTemplate.exchange(orderUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<OrderResponseDto>>() {});
-        List<OrderResponseDto> ordersList = listResponseEntity.getBody();
+//        String orderUrl = String.format(env.getProperty("order_service.url"), userId);
+//        ResponseEntity<List<OrderResponseDto>> listResponseEntity
+//                = restTemplate.exchange(orderUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<OrderResponseDto>>() {});
+//        List<OrderResponseDto> ordersList = listResponseEntity.getBody();
+
+        List<OrderResponseDto> ordersList = orderServiceClient.getOrders(userId);
 
         return UserResponseDto.builder()
                 .email(user.getEmail())
