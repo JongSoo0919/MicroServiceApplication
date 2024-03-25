@@ -8,7 +8,9 @@ import com.user.applicationuserservice.dto.response.OrderResponseDto;
 import com.user.applicationuserservice.dto.response.UserResponseDto;
 import com.user.applicationuserservice.repository.UserRepository;
 import com.user.applicationuserservice.service.UserService;
+import feign.FeignException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
@@ -28,6 +30,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -80,8 +83,8 @@ public class UserServiceImpl implements UserService{
 //                = restTemplate.exchange(orderUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<OrderResponseDto>>() {});
 //        List<OrderResponseDto> ordersList = listResponseEntity.getBody();
 
+        /* Feign Exception Handling */
         List<OrderResponseDto> ordersList = orderServiceClient.getOrders(userId);
-
         return UserResponseDto.builder()
                 .email(user.getEmail())
                 .name(user.getName())
