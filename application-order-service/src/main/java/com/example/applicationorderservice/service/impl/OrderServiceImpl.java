@@ -4,6 +4,7 @@ import com.example.applicationorderservice.dto.request.OrderRequestDto;
 import com.example.applicationorderservice.dto.response.OrderResponseDto;
 import com.example.applicationorderservice.entity.OrderEntity;
 import com.example.applicationorderservice.repository.OrderRepository;
+import com.example.applicationorderservice.service.KafkaProducerService;
 import com.example.applicationorderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
