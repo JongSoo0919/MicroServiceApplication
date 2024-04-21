@@ -45,3 +45,7 @@ management:
 #logging:
 #  level:
 #    com.user.applicationuserservice.client:debug
+
+token:
+  secret: 83f01c82ca0e459e653e9741067bccb04cb94bd3049e68b00cb6513c2d3cf957
+  expiration_time: 864000
