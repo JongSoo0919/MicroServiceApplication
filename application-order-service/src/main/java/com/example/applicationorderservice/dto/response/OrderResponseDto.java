@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderResponseDto {
     private String productId;
+    private String userId;
     private Integer qty;
     private Integer unitPrice;
     private Integer totalPrice;
@@ -20,8 +21,9 @@ public class OrderResponseDto {
     private String orderId;
 
     @Builder
-    public OrderResponseDto(String productId, Integer qty, Integer unitPrice, Integer totalPrice, LocalDate createdAt, String orderId) {
+    public OrderResponseDto(String productId, String userId, Integer qty, Integer unitPrice, Integer totalPrice, LocalDate createdAt, String orderId) {
         this.productId = productId;
+        this.userId = userId;
         this.qty = qty;
         this.unitPrice = unitPrice;
         this.totalPrice = totalPrice;

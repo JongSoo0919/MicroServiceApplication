@@ -19,22 +19,22 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     @Override
     public OrderResponseDto createOrder(OrderRequestDto orderRequestDto) {
-        OrderEntity entity = orderRepository.save(OrderEntity.builder()
-                .productId(orderRequestDto.getProductId())
-                .userId(orderRequestDto.getUserId())
-                .qty(orderRequestDto.getQty())
-                .unitPrice(orderRequestDto.getUnitPrice())
-                .totalPrice(orderRequestDto.getUnitPrice() * orderRequestDto.getQty())
-                .orderId(UUID.randomUUID().toString())
-                .build());
+//        OrderEntity entity = orderRepository.save(OrderEntity.builder()
+//                .productId(orderRequestDto.getProductId())
+//                .userId(orderRequestDto.getUserId())
+//                .qty(orderRequestDto.getQty())
+//                .unitPrice(orderRequestDto.getUnitPrice())
+//                .totalPrice(orderRequestDto.getUnitPrice() * orderRequestDto.getQty())
+//                .orderId(UUID.randomUUID().toString())
+//                .build());
 
         return OrderResponseDto.builder()
-                .productId(entity.getProductId())
-                .totalPrice(entity.getTotalPrice())
-                .unitPrice(entity.getUnitPrice())
-                .qty(entity.getQty())
-                .createdAt(entity.getCreatedAt())
-                .orderId(entity.getOrderId())
+                .userId(orderRequestDto.getUserId())
+                .productId(orderRequestDto.getProductId())
+                .totalPrice(orderRequestDto.getUnitPrice() * orderRequestDto.getQty())
+                .unitPrice(orderRequestDto.getUnitPrice())
+                .qty(orderRequestDto.getQty())
+                .orderId(UUID.randomUUID().toString())
                 .build();
     }
 
