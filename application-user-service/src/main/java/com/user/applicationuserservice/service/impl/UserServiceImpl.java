@@ -12,6 +12,8 @@ import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
@@ -37,6 +39,8 @@ public class UserServiceImpl implements UserService{
     private final OrderServiceClient orderServiceClient;
 //    private final RestTemplate restTemplate;
 //    private final Environment env;
+
+    private final CircuitBreakerFactory circuitBreakerFactory;
     @Override
     public UserResponseDto createUser(UserRequestDto userRequestDto) {
         // 중복 회원가입 처리
@@ -84,7 +88,13 @@ public class UserServiceImpl implements UserService{
 //        List<OrderResponseDto> ordersList = listResponseEntity.getBody();
 
         /* Feign Exception Handling */
-        List<OrderResponseDto> ordersList = orderServiceClient.getOrders(userId);
+//        List<OrderResponseDto> ordersList = orderServiceClient.getOrders(userId);
+
+        /* circuitbreaker */
+        CircuitBreaker circuitBreaker = circuitBreakerFactory.create("circuitbreaker");
+        List<OrderResponseDto> ordersList = circuitBreaker.run(() -> orderServiceClient.getOrders(userId)
+                , throwable -> new ArrayList<>());
+
         return UserResponseDto.builder()
                 .email(user.getEmail())
                 .name(user.getName())
