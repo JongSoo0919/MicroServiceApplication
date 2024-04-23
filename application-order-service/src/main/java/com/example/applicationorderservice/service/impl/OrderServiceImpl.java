@@ -19,14 +19,14 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     @Override
     public OrderResponseDto createOrder(OrderRequestDto orderRequestDto) {
-//        OrderEntity entity = orderRepository.save(OrderEntity.builder()
-//                .productId(orderRequestDto.getProductId())
-//                .userId(orderRequestDto.getUserId())
-//                .qty(orderRequestDto.getQty())
-//                .unitPrice(orderRequestDto.getUnitPrice())
-//                .totalPrice(orderRequestDto.getUnitPrice() * orderRequestDto.getQty())
-//                .orderId(UUID.randomUUID().toString())
-//                .build());
+        OrderEntity entity = orderRepository.save(OrderEntity.builder()
+                .productId(orderRequestDto.getProductId())
+                .userId(orderRequestDto.getUserId())
+                .qty(orderRequestDto.getQty())
+                .unitPrice(orderRequestDto.getUnitPrice())
+                .totalPrice(orderRequestDto.getUnitPrice() * orderRequestDto.getQty())
+                .orderId(UUID.randomUUID().toString())
+                .build());
 
         return OrderResponseDto.builder()
                 .userId(orderRequestDto.getUserId())
