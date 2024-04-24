@@ -4,6 +4,7 @@ import com.user.applicationuserservice.constants.Constants;
 import com.user.applicationuserservice.dto.request.UserRequestDto;
 import com.user.applicationuserservice.dto.response.UserResponseDto;
 import com.user.applicationuserservice.service.UserService;
+import io.micrometer.core.annotation.Timed;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +21,7 @@ public class UserController {
     private final UserService userService;
     private final Environment env;
     @GetMapping("/health_check")
+    @Timed(value = "users.status", longTask = true)
     public String status() {
         return "It's Working in User Service"
                 + ", port(local.server.port) = " + env.getProperty("local.server.port")
@@ -29,6 +31,7 @@ public class UserController {
     }
 
     @GetMapping("/welcome")
+    @Timed(value = "users.welcome", longTask = true)
     public String welcome() {
         return Constants.WELCOME_MESSAGE;
     }

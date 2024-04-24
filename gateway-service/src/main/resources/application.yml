@@ -63,6 +63,15 @@ spring:
             uri: lb://APPLICATION-ORDER-SERVICE
             predicates:
               - Path=/order-service/**
+          - id: application-order-service
+            uri: lb://APPLICATION-ORDER-SERVICE
+            predicates:
+              #401 Error 잡아야함
+              - Path=/order-service/actuator/**
+              - Method=GET,POST
+            filters:
+              - RemoveRequestHeader=Cookie
+              - RewritePath=/order-service/(?<segment>.*), /$\{segment}
           - id : first-service
             uri : lb://GATEWAY-FIRST-SERVICE
             predicates:
@@ -98,5 +107,5 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh, health, beans, httptrace, busrefresh
+        include: refresh, health, beans, httptrace, busrefresh, info, metrics, prometheus
 
